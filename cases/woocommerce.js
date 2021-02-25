@@ -11,6 +11,7 @@ page.open(test_url, function(status) {
     console.log(`Opening ${test_url}...`);
     if(status === "success") {
         console.log('Success!')
+        page.render('screenshots/shop_page.png');
         const shopPageContent = page.content;
         const document = $(shopPageContent)
         const productsElem = document.find(".products");
@@ -29,10 +30,13 @@ page.open(test_url, function(status) {
                             const pPage = page.open(pUrl, function (status) {
                                 if (status === 'success') {
                                     console.log('Success!')
+                                    page.render('screenshots/product_page.png');
                                     const pDocument = $(page.content)
                                     const snippet = pDocument.find('.wc-latitudefinance-latitudepay-container');
                                     if (snippet) {
                                         console.log("A snippet was found in product page!")
+                                        page.evaluateJavaScript("function(){ var snippet = document.querySelector('.wc-latitudefinance-latitudepay-container'); }");
+                                        page.render('screenshots/product_page_modal.png');
                                     } else {
                                         console.log('No snippets found!')
                                     }
